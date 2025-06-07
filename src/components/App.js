@@ -20,28 +20,33 @@ const App = () => {
     if (!name || !email || !password || !number) {
       setError("All fields are mandatory")
       flag = false
-
+return flag
 
     }
     if (!/^[a-z0-9 ]+$/i.test(name)) {
-      setError("Name is not alphanumeric.");
+      setError("Name is not alphanumeric");
       flag = false;
+    return flag
     }
     if (!email.includes("@")) {
-      setError("Error Message:Email must contain @.")
+      setError("Email must contain @")
       flag = false
+    return flag
     }
     if (password.length < 6) {
       setError("Password must contain atleast 6 letters")
       flag = false
+   return flag
     }
     if (isNaN(number)) {
-      setError("Phone Number must contain only numbers.")
+      setError("Phone Number must contain only numbers")
       flag = false
+    return flag
     }
     if (!["male", "female", "other"].includes(gender)) {
-      setError("Please identify as male, female or others.  ")
+      setError("Please identify as male, female or others")
       flag = false
+    return   flag
     }
     return flag
   }
@@ -107,7 +112,7 @@ const App = () => {
         <button type="submit" data-testid="submit" >Submit</button>
       </form>
       {error && <span data-testid="error" style={{ color: "red" }}>{error}</span>}
-      {userName !== "" ? <h2>hello, {userName}</h2> : ""}
+      {userName !== "" ? <h2>Hello {userName.toUpperCase()}</h2> : ""}
     </div>
   )
 }
