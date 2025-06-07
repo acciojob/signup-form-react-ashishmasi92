@@ -13,42 +13,60 @@ const App = () => {
   })
   let { name, email, password, number, gender } = state;
 
+function isAlphanumeric(str) {
+  for (let i = 0; i < str.length; i++) {
+    const code = str.charCodeAt(i);
+    const c = str[i].toLowerCase();
+    if (
+      !(
+        (code >= 48 && code <= 57) || // 0-9
+        (code >= 97 && code <= 122) || // a-z
+        c === ' '
+      )
+    ) {
+      return false;
+    }
+  }
+  return true;
+}
+ 
 
   function formValidation() {
-    let flag = true
+
 
     if (!name || !email || !password || !number) {
       setError("All fields are mandatory")
-      flag = false
-return flag
+      return false
 
     }
-    if (!/^[a-z0-9 ]+$/i.test(name)) {
-      setError("Name is not alphanumeric");
-      flag = false;
-    return flag
-    }
+
+
+// Then inside formValidation:
+if (!isAlphanumeric(name)) {
+  setError("Name is not alphanumeric");
+  return false;
+}
+    
     if (!email.includes("@")) {
       setError("Email must contain @")
-      flag = false
-    return flag
+      return false
     }
     if (password.length < 6) {
       setError("Password must contain atleast 6 letters")
-      flag = false
-   return flag
+      return false
     }
-    if (isNaN(number)) {
-      setError("Phone Number must contain only numbers")
-      flag = false
-    return flag
+    if (number === "" || number.split("").some(char => isNaN(char))) {
+      setError("Phone Number must contain only numbers");
+      return false;
     }
     if (!["male", "female", "other"].includes(gender)) {
       setError("Please identify as male, female or others")
-      flag = false
-    return   flag
+      return false
     }
-    return flag
+
+
+    setError("")
+    return true
   }
 
 
