@@ -31,6 +31,7 @@ function isAlphanumeric(str) {
 }
  
 
+
   function formValidation() {
 
 
@@ -120,7 +121,7 @@ if (!isAlphanumeric(name)) {
         </select>
         <label>
           Phone Number:
-          <input type="number" onChange={handleChange} data-testid='phoneNumber' name="number" value={state.number} />
+          <input type="text" onChange={handleChange} data-testid='phoneNumber' name="number" value={state.number} />
         </label>
 
         <label>
