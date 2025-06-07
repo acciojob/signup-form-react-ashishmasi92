@@ -106,8 +106,8 @@ const App = () => {
         </label>
         <button type="submit" data-testid="submit" >Submit</button>
       </form>
-      {error && <p data-testid="error" style={{ color: "red" }}>{error}</p>}
-      {userName !== "" ? <p>hello, {userName}</p> : ""}
+      {error && <span data-testid="error" style={{ color: "red" }}>{error}</span>}
+      {userName !== "" ? <h2>hello, {userName}</h2> : ""}
     </div>
   )
 }
