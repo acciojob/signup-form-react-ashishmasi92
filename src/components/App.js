@@ -11,7 +11,7 @@ const App = () => {
     number: "",
     gender: "male"
   })
-  let { name, email, password, number,gender } = state;
+  let { name, email, password, number, gender } = state;
 
 
   function formValidation() {
@@ -23,9 +23,9 @@ const App = () => {
 
 
     }
-    if (!isAlphanumeric(name)) {
-      setError(" Name is not alphanumeric.")
-      flag = false
+    if (!/^[a-z0-9 ]+$/i.test(name)) {
+      setError("Name is not alphanumeric.");
+      flag = false;
     }
     if (!email.includes("@")) {
       setError("Error Message:Email must contain @.")
@@ -39,10 +39,10 @@ const App = () => {
       setError("Phone Number must contain only numbers.")
       flag = false
     }
-if(!["male","female","other"].includes(gender)){
-  setError("Please identify as male, female or others.  ")
-  flag=false
-}
+    if (!["male", "female", "other"].includes(gender)) {
+      setError("Please identify as male, female or others.  ")
+      flag = false
+    }
     return flag
   }
 
@@ -64,11 +64,11 @@ if(!["male","female","other"].includes(gender)){
     if (formValidation()) {
       let index = email.indexOf("@")
       setUserName(email.slice(0, index))
-      
+
       alert("form submitted successfully")
 
     }
-    else{
+    else {
       setUserName("")
     }
 
@@ -90,7 +90,7 @@ if(!["male","female","other"].includes(gender)){
           <input type="email" name="email" data-testid='email' onChange={handleChange} value={state.email} />
         </label>
 
-        <select data-testid='gender' name="gender" onChange={handleChange} >
+        <select data-testid='gender' name="gender" value={state.gender} onChange={handleChange} >
           <option value="male" >Male</option>
           <option value="female" >Female</option>
           <option value="other" >other</option>
@@ -104,8 +104,9 @@ if(!["male","female","other"].includes(gender)){
           Password:
           <input type="password" data-testid='password' onChange={handleChange} name="password" value={state.password} />
         </label>
-        <button type="submit" >Submit</button>
+        <button type="submit" data-testid="submit" >Submit</button>
       </form>
+      {error && <p data-testid="error" style={{ color: "red" }}>{error}</p>}
       {userName !== "" ? <p>hello, {userName}</p> : ""}
     </div>
   )
